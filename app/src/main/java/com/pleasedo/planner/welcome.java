@@ -13,7 +13,7 @@ public class welcome extends AppCompatActivity {
     private static FloatingActionMenu menu;
     private static FloatingActionButton floatingEvent,floatingNote;
 
-//asdasdasd
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
