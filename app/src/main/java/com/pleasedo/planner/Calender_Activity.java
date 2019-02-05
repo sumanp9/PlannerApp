@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +18,16 @@ import java.util.Date;
 public class Calender_Activity extends AppCompatActivity {
 
     private static CalendarView calendarView;
+    private static TextView txtViewHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-
         calendarView = (CalendarView)findViewById(R.id.calendarView);
+        txtViewHeader=(TextView)findViewById(R.id.txtViewHeader);
+        String note = getIntent().getStringExtra("note");
+        txtViewHeader.setText("Please select a date to add a "+note);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
