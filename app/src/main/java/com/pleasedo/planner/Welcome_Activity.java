@@ -8,7 +8,7 @@ import android.view.View;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
-//Team Members: Anisha Shrestha
+//Team Members: Anisha Shrestha,Suman Pradhan
 public class Welcome_Activity extends AppCompatActivity {
 
     private static FloatingActionMenu menu;
