@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         gettingDate();
 
-    }
+    }//asdas
 
     private void gettingDate() {
         button = (Button)findViewById(R.id.button);
