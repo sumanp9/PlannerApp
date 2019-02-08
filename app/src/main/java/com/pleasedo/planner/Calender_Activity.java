@@ -28,16 +28,23 @@ public class Calender_Activity extends AppCompatActivity {
         txtViewHeader=(TextView)findViewById(R.id.txtViewHeader);
         String note = getIntent().getStringExtra("note");
         txtViewHeader.setText("Please select a date to add a "+note);
+
+
+        createDate(note);
+
+
+    }
+
+    private void createDate(final String note) {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String selectedDate = month+1+"/"+dayOfMonth+"/"+year ;
 
-                //Hint: convert String selectedDate to type Date and compaare
+                //Hint: convert String selectedDate to type Date and compare
                 //it with the today's date. If the selectedDate is lesser or in the past then
                 //allow user to select the date again. if not proceed as normal.
-                Intent intent = new Intent(Calender_Activity.this, MainActivity.class);
-                intent.putExtra("date",selectedDate);
+
 
 
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -53,16 +60,18 @@ public class Calender_Activity extends AppCompatActivity {
 
                 //Somehow this is working
                 if ((userdate.getYear()>=today.getYear() && userdate.getMonth() >= today.getMonth() && userdate.getDate() >=today.getDate())){
-                    startActivity(intent);
+                    if (note.equals("Event")) {
+                        Intent intent = new Intent(Calender_Activity.this, EventActivity.class);
+                        intent.putExtra("date", selectedDate);
+                        startActivity(intent);
+                    }
 
                 }
-               else{
+                else{
                     Toast.makeText(Calender_Activity.this, "Please select a valid date", Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
-
-
     }
 }
