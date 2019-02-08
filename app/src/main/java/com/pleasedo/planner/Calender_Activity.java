@@ -2,8 +2,10 @@ package com.pleasedo.planner;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.CalendarView;
 import android.widget.TextView;
@@ -19,18 +21,29 @@ public class Calender_Activity extends AppCompatActivity {
 
     private static CalendarView calendarView;
     private static TextView txtViewHeader;
-
+    private FloatingActionButton floatingCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
         calendarView = (CalendarView)findViewById(R.id.calendarView);
         txtViewHeader=(TextView)findViewById(R.id.txtViewHeader);
+        floatingCancel = (FloatingActionButton)findViewById(R.id.floatingCancel);
         String note = getIntent().getStringExtra("note");
         txtViewHeader.setText("Please select a date to add a "+note);
 
 
         createDate(note);
+
+        floatingCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Calender_Activity.this, welcome.class);
+                startActivity(intent);
+
+            }
+        });
+
 
 
     }
