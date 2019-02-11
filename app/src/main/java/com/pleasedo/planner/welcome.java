@@ -1,10 +1,9 @@
 package com.pleasedo.planner;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -37,9 +36,12 @@ public class welcome extends AppCompatActivity {
         floatingEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(welcome.this,Calender_Activity.class);
-                intent.putExtra("note",event);
+                Intent intent = new Intent(welcome.this, EventsActivity.class);
                 startActivity(intent);
+
+                /*Intent intent =  new Intent(welcome.this,Calender_Activity.class);
+                intent.putExtra("note",event);
+                startActivity(intent);*/
             }
         });
     }

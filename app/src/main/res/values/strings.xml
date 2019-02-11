@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Planner</string>
     <string name="title_activity_welcome_">Welcome_Activity</string>
+    <string name="title_activity_events">EventsActivity</string>
 </resources>
