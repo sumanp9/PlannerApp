@@ -6,20 +6,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.pleasedo.dbClass.Login;
+
 public class loginDB extends SQLiteOpenHelper {
 
-    private static final  int DATABASE_VERSION =1;
+    private static final  int DATABASE_VERSION =2;
     private static final String DATABASE_NAME = "userLogin.db"; //file name saving on device
 
 
 
-    public static final String TABLE_LOGIN = "ID";
+    public static final String TABLE_LOGIN = "Login";
     private static final String col_id = "ID";
     private static final String  col_username= "Username";
     private static final String col_fName = "First_Name";
     private static final String col_lName = "Last_Name";
     private static final String col_email = "Email";
-    private static final String col_password = "First_Name";
+    private static final String col_password = "Password";
 
     public loginDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -27,7 +29,7 @@ public class loginDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_LOGIN + "(" + col_id + "INTEGER PRIMARY KEY AUTOINCREMENT ,"+ col_username + " TEXT ,"+
+        String query = "CREATE TABLE " + TABLE_LOGIN + "(" + col_id + " INTEGER PRIMARY KEY AUTOINCREMENT ,"+ col_username + " TEXT ,"+
                 col_fName + " TEXT ,"+ col_lName + " TEXT ," + col_email+ " TEXT ,"+ col_password +" TEXT "+ ");";
         db.execSQL(query);
     }
@@ -42,7 +44,6 @@ public class loginDB extends SQLiteOpenHelper {
     public void addProduct(Login login){
         //makes inserting rows into table easy
         ContentValues values = new ContentValues();
-        values.put(col_id, login.getCol_id());
         values.put(col_username, login.getCol_username());
         values.put(col_fName, login.getCol_fName());
         values.put(col_lName, login.getCol_lName());
@@ -83,3 +84,4 @@ public class loginDB extends SQLiteOpenHelper {
     }
 
 }
+

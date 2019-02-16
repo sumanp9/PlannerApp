@@ -1,4 +1,4 @@
-package com.pleasedo.planner;
+package com.pleasedo.dbClass;
 
 public class Login {
 

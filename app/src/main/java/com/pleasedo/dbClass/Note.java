@@ -1,4 +1,4 @@
-package com.pleasedo.planner.com.pleasedo.dbs;
+package com.pleasedo.dbClass;
 
 public class Note {
 
