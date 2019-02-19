@@ -28,8 +28,12 @@ public class Calender_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_calender);
         calendarView = (CalendarView)findViewById(R.id.calendarView);
         txtViewHeader=(TextView)findViewById(R.id.txtViewHeader);
+
+        final String note = getIntent().getStringExtra("note");
+
         floatingCancel = (FloatingActionButton)findViewById(R.id.floatingCancel);
         String note = getIntent().getStringExtra("note");
+
         txtViewHeader.setText("Please select a date to add a "+note);
 
 
@@ -59,7 +63,6 @@ public class Calender_Activity extends AppCompatActivity {
                 //allow user to select the date again. if not proceed as normal.
 
 
-
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
                 Date today = new Date();
@@ -73,9 +76,14 @@ public class Calender_Activity extends AppCompatActivity {
 
                 //Somehow this is working
                 if ((userdate.getYear()>=today.getYear() && userdate.getMonth() >= today.getMonth() && userdate.getDate() >=today.getDate())){
+
+                    if (note.equals("Note") ){
+                        Intent intent = new Intent(Calender_Activity.this, NoteActivity.class);
+
                     if (note.equals("Event")) {
                         Intent intent = new Intent(Calender_Activity.this, EventActivity.class);
                         intent.putExtra("date", selectedDate);
+
                         startActivity(intent);
                     }
 
