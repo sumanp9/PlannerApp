@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+        <activity android:name=".EventsActivity"></activity>
+
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".NoteActivity" />
+
 
         <activity android:name=".welcome">
             <intent-filter>

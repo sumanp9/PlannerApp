@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Planner</string>
     <string name="title_activity_welcome_">Welcome_Activity</string>
+
+    <string name="title_activity_events">EventsActivity</string>
+
     <string name="add_notes">Add Notes</string>
     <string name="note_title">Note Title</string>
     <string name="title_activity_login2">Sign in</string>
@@ -16,4 +19,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
 </resources>
