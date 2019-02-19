@@ -36,6 +36,7 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
+        //Hello, this is just for testing purpose
 
 
     }
