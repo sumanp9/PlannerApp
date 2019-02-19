@@ -30,6 +30,7 @@ public class EventActivity extends AppCompatActivity {
         floatingCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finishActivity(0);
                 Intent intent = new Intent(EventActivity.this, welcome.class);
                 startActivity(intent);
 
