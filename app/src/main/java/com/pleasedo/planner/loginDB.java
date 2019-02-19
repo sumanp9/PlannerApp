@@ -54,7 +54,7 @@ public class loginDB extends SQLiteOpenHelper {
         db.close();
     }
 
-    public String databaseToString(){
+    public String print(){
         String dbString= "";
         SQLiteDatabase db =  getWritableDatabase();
         String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
