@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,14 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<String>userArray = new ArrayList<String>();
-
+                userArray = newHandler.userList();
+                String userName = UserName.getText().toString();
+                if (userArray.contains(userName)){
+                    Toast.makeText(RegisterActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
+                    UserName.setText("");
+                    Password.setText("");
+                    RetypePassword.setText("");
+                }
             }
         });
     }
