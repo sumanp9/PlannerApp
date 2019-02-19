@@ -82,10 +82,10 @@ public class loginDB extends SQLiteOpenHelper {
         return userArray;
     }
 
-    public String print(){
-
-        String dbString= "";
+    public Boolean getPassword(String userName, String password){
+        String extractPass= "";
         SQLiteDatabase db =  getWritableDatabase();
+
         String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
 
         //Cursor point to a location in your results
@@ -95,10 +95,43 @@ public class loginDB extends SQLiteOpenHelper {
         c.moveToFirst();
 
         while(!c.isAfterLast()){
-            if (c.getString(c.getColumnIndex("Username"))!=null){
+            if (c.getString(c.getColumnIndex("Password"))!=null){
 
-                dbString += c.getString(c.getColumnIndex("Username"));
-                dbString+="\n";
+                extractPass += c.getString(c.getColumnIndex("Password"));
+
+            }
+            c.moveToNext();
+        }
+
+
+        db.close();
+
+        if (password.equals(extractPass)){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public String print(){
+
+        String dbString= "";
+        SQLiteDatabase db =  getWritableDatabase();
+
+        String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
+
+        //Cursor point to a location in your results
+        Cursor c =  db.rawQuery(query,null);
+
+        //Move to the first row in your results
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+            if (c.getString(c.getColumnIndex("Password"))!=null){
+
+                dbString += c.getString(c.getColumnIndex("Password"));
 
             }
             c.moveToNext();

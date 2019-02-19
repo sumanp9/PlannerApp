@@ -29,7 +29,6 @@ public class Calender_Activity extends AppCompatActivity {
         calendarView = (CalendarView)findViewById(R.id.calendarView);
         txtViewHeader=(TextView)findViewById(R.id.txtViewHeader);
 
-        final String note = getIntent().getStringExtra("note");
 
         floatingCancel = (FloatingActionButton)findViewById(R.id.floatingCancel);
         String note = getIntent().getStringExtra("note");
@@ -56,7 +55,7 @@ public class Calender_Activity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String selectedDate = month+1+"/"+dayOfMonth+"/"+year ;
+                String selectedDate = month + 1 + "/" + dayOfMonth + "/" + year;
 
                 //Hint: convert String selectedDate to type Date and compare
                 //it with the today's date. If the selectedDate is lesser or in the past then
@@ -66,33 +65,34 @@ public class Calender_Activity extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
                 Date today = new Date();
-                Date userdate =  new Date();
+                Date userdate = new Date();
                 try {
-                    userdate =sdf.parse(selectedDate);
+                    userdate = sdf.parse(selectedDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
 
                 //Somehow this is working
-                if ((userdate.getYear()>=today.getYear() && userdate.getMonth() >= today.getMonth() && userdate.getDate() >=today.getDate())){
+                if ((userdate.getYear() >= today.getYear() && userdate.getMonth() >= today.getMonth() && userdate.getDate() >= today.getDate())) {
 
-                    if (note.equals("Note") ){
+                    if (note.equals("Note")) {
                         Intent intent = new Intent(Calender_Activity.this, NoteActivity.class);
-
-                    if (note.equals("Event")) {
-                        Intent intent = new Intent(Calender_Activity.this, EventActivity.class);
-                        intent.putExtra("date", selectedDate);
-
-                        startActivity(intent);
                     }
+                    if (note.equals("Event")) {
+                        Intent newintent = new Intent(Calender_Activity.this, EventActivity.class);
+                        newintent.putExtra("date", selectedDate);
 
-                }
-                else{
-                    Toast.makeText(Calender_Activity.this, "Please select a valid date", Toast.LENGTH_SHORT).show();
+                        startActivity(newintent);
+                    } else {
+                        Toast.makeText(Calender_Activity.this, "Please select a valid date", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
             }
+
+
         });
     }
+
 }
