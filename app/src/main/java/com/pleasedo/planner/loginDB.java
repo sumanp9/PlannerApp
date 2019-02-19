@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class loginDB extends SQLiteOpenHelper {
 
     private static final  int DATABASE_VERSION =2;
-    private static final String DATABASE_NAME = "userLogin.db"; //file name saving on device
+    private static final String DATABASE_NAME = "userLogin.db"; //file name saving on devices
 
 
 
