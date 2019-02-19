@@ -1,4 +1,4 @@
-package com.pleasedo.planner;
+package com.pleasedo.databases;
 
 import android.content.ContentValues;
 import android.content.Context;
