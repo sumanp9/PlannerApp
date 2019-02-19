@@ -42,7 +42,7 @@ public class loginDB extends SQLiteOpenHelper {
     }
 
     public void addProduct(Login login){
-        //makes inserting rows into table easy
+        //makes inserting rows into table easyee
         ContentValues values = new ContentValues();
         values.put(col_username, login.getCol_username());
         values.put(col_fName, login.getCol_fName());
