@@ -45,7 +45,7 @@ public class loginDB extends SQLiteOpenHelper {
     }
 
     public void addProduct(Login login){
-        //makes inserting rows into table easy
+        //makes inserting rows into table easyee
         ContentValues values = new ContentValues();
         values.put(col_username, login.getCol_username());
         values.put(col_fName, login.getCol_fName());
@@ -56,6 +56,7 @@ public class loginDB extends SQLiteOpenHelper {
         db.insert(TABLE_LOGIN, null,values);
         db.close();
     }
+
 
     public ArrayList<String> userList(){
         ArrayList<String> userArray = new ArrayList<String>();
@@ -81,7 +82,8 @@ public class loginDB extends SQLiteOpenHelper {
         return userArray;
     }
 
-    public String databaseToString(){
+    public String print(){
+
         String dbString= "";
         SQLiteDatabase db =  getWritableDatabase();
         String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
