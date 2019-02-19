@@ -5,13 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ArrayAdapter;
 
 import com.pleasedo.dbClass.Login;
+
+import java.util.ArrayList;
 
 public class loginDB extends SQLiteOpenHelper {
 
     private static final  int DATABASE_VERSION =2;
-    private static final String DATABASE_NAME = "userLogin.db"; //file name saving on device
+    private static final String DATABASE_NAME = "userLogin.db"; //file name saving on devices
 
 
 
@@ -54,7 +57,33 @@ public class loginDB extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    public ArrayList<String> userList(){
+        ArrayList<String> userArray = new ArrayList<String>();
+        SQLiteDatabase db =  getWritableDatabase();
+        String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
+        Cursor c =  db.rawQuery(query,null);
+
+        //Move to the first row in your results
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+            if (c.getString(c.getColumnIndex("Username"))!=null){
+
+                userArray.add(c.getString(c.getColumnIndex("Username")));
+
+            }
+            c.moveToNext();
+        }
+
+
+        db.close();
+
+        return userArray;
+    }
+
     public String print(){
+
         String dbString= "";
         SQLiteDatabase db =  getWritableDatabase();
         String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
@@ -82,6 +111,7 @@ public class loginDB extends SQLiteOpenHelper {
         return dbString;
 
     }
+
 
 }
 
