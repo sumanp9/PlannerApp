@@ -5,4 +5,5 @@
     <color name="colorAccent">#F0EC70</color>
     <color name="tickBlue">#3F3FDD</color>
     <color name="white">#ffffff</color>
+    <color name="grey">#808080</color>
 </resources>

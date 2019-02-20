@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                 userArray = newHandler.userList();
                 String userName = UserName.getText().toString();
                 String pass = Password.getText().toString();
+                String rePass = RetypePassword.getText().toString();
                 String fName = FirstName.getText().toString();
                 String lName = LastName.getText().toString();
                 String email = Email.getText().toString();
@@ -57,16 +58,39 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     Login login =  new Login(userName,fName,lName,email,pass);
-                    newHandler.addProduct(login);
 
-                    Toast.makeText(RegisterActivity.this, "Congrats "+userName, Toast.LENGTH_SHORT).show();
+                    Boolean check = validChecks(userName,pass,rePass,fName, lName, email);
 
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                    if (check){
+                        newHandler.addProduct(login);
+
+
+                        Toast.makeText(RegisterActivity.this, "Congrats "+userName, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+
+                    }
 
                 }
-
             }
         });
+    }
+
+    private Boolean validChecks(String userName, String pass,String rePass, String fName, String lName, String email) {
+
+        if (userName.equals("")||pass.equals("")||rePass.equals("")||fName.equals("")||lName.equals("")||email.equals("")){
+            Toast.makeText(this, "Please fill in the empty box", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else{
+            if (pass.equals(rePass)){
+                return true;
+            }
+            else{
+                Toast.makeText(this, "Password does not match. Please retype password", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
     }
 }

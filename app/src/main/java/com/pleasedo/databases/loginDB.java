@@ -86,7 +86,7 @@ public class loginDB extends SQLiteOpenHelper {
         String extractPass= "";
         SQLiteDatabase db =  getWritableDatabase();
 
-        String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
+        String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE "+ col_username +" = "+ "'"+userName+"'";
 
         //Cursor point to a location in your results
         Cursor c =  db.rawQuery(query,null);
@@ -113,6 +113,30 @@ public class loginDB extends SQLiteOpenHelper {
             return false;
         }
 
+    }
+
+    public ArrayList<String> emailExists(){
+        ArrayList<String> emailArray = new ArrayList<String>();
+        SQLiteDatabase db =  getWritableDatabase();
+        String query = "SELECT * FROM "+ TABLE_LOGIN + " WHERE 1";
+        Cursor c =  db.rawQuery(query,null);
+
+        //Move to the first row in your results
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+            if (c.getString(c.getColumnIndex("Email"))!=null){
+
+                emailArray.add(c.getString(c.getColumnIndex("Email")));
+
+            }
+            c.moveToNext();
+        }
+
+
+        db.close();
+
+        return emailArray;
     }
 
     public String print(){

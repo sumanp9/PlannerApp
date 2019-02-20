@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class LoginActivity extends AppCompatActivity {
 
     private  EditText UserName, Password,box;
-    private  Button btnLogin,btnRegister;
+    private  Button btnLogin,btnRegister,btnForgot;
 
     loginDB dbHandler;
 
@@ -30,13 +30,18 @@ public class LoginActivity extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.Password);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
+        btnForgot =findViewById(R.id.btnForgot);
 
         box = findViewById(R.id.box);
 
         loginPressed();
         registerPressed();
+        forgotPressed();
 
 
+    }
+
+    private void forgotPressed() {
     }
 
     private void registerPressed() {
@@ -69,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         box.setText(dbHandler.print());
         if (userArray.contains(userName)){
             if(dbHandler.getPassword(userName,password)){
-                Toast.makeText(this, "Sucessful Login", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
             }
             else{
                 Toast.makeText(this, "Username or password incorrect", Toast.LENGTH_LONG).show();
