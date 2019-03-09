@@ -8,7 +8,7 @@ public class userActivityDB extends SQLiteOpenHelper {
     private static final  int DATABASE_VERSION =2;
     private static final String DATABASE_NAME = ".db";
 
-    public userActivityDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public userActivityDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, String dbName) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 

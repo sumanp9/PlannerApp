@@ -36,6 +36,12 @@ public class RegisterActivity extends AppCompatActivity {
         checkUsername();
     }
 
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
     private void checkUsername() {
 
         Register.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
 
                     }
 

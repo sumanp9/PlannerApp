@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private  EditText UserName, Password,box;
+    private  EditText user, pass,box;
     private  Button btnLogin,btnRegister,btnForgot;
 
     loginDB dbHandler;
@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         dbHandler = new loginDB(this,null,null,1);
 
-        UserName = (EditText)findViewById(R.id.UsernamePT);
-        Password = (EditText)findViewById(R.id.Password);
+        user = (EditText)findViewById(R.id.UsernamePT);
+        pass = (EditText)findViewById(R.id.Password);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
         btnForgot =findViewById(R.id.btnForgot);
@@ -42,6 +42,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void forgotPressed() {
+        btnForgot.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void registerPressed() {
@@ -50,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -59,8 +69,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkUserNameandPassword();
 
+                if (user.getText().toString().isEmpty()){
+                    user.setError("Username cannot be empty");
+                }
+                else if (pass.getText().toString().isEmpty()){
+                    pass.setError("Password field cannot be empty");
+                }
+                else {
+                    checkUserNameandPassword();
+                }
             }
         });
     }
@@ -68,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
     private void checkUserNameandPassword() {
 
         ArrayList<String>userArray = new ArrayList<String>();
-        String userName =  UserName.getText().toString();
-        String password = Password.getText().toString();
+        String userName =  user.getText().toString();
+        String password = pass.getText().toString();
         userArray =  dbHandler.userList();
         box.setText(dbHandler.print());
         if (userArray.contains(userName)){
