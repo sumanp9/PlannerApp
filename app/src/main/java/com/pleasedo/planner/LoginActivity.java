@@ -1,6 +1,7 @@
 package com.pleasedo.planner;
 
 import android.content.Intent;
+import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pleasedo.StoredData.Prefeneces;
 import com.pleasedo.databases.loginDB;
 
 import java.util.ArrayList;
@@ -34,11 +36,41 @@ public class LoginActivity extends AppCompatActivity {
 
         box = findViewById(R.id.box);
 
+        if (!Prefeneces.ifExists(this)){
+            signIn();
+        }
+
         loginPressed();
         registerPressed();
         forgotPressed();
 
 
+    }
+
+    private boolean getUsers(String userName, String password) {
+        ArrayList<String>userArray = new ArrayList<String>();
+        userArray =  dbHandler.userList();
+        if (userArray.contains(userName)){
+            if(dbHandler.getPassword(userName,password)){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private void signIn() {
+        if (!Prefeneces.getUsername(this).equals("")) {
+            String username = Prefeneces.getUsername(this);
+            String pass = Prefeneces.getPassword(this);
+            if (getUsers(username,pass)){
+                Intent intent = new Intent(this, welcome.class);
+                intent.putExtra("Username", username);
+                startActivity(intent);
+                finish();
+            }
+
+        }
     }
 
     private void forgotPressed() {
@@ -48,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -92,7 +123,12 @@ public class LoginActivity extends AppCompatActivity {
         box.setText(dbHandler.print());
         if (userArray.contains(userName)){
             if(dbHandler.getPassword(userName,password)){
+                Prefeneces.saveUserData(userName,password,this);
                 Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, welcome.class);
+                intent.putExtra("Username", userName);
+                startActivity(intent);
+                finish();
             }
             else{
                 Toast.makeText(this, "Username or password incorrect", Toast.LENGTH_LONG).show();

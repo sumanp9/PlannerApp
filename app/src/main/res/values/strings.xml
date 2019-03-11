@@ -24,5 +24,6 @@
     <string name="reset">Reset</string>
     <string name="login">Login</string>
     <string name="or">or</string>
+    <string name="welcome">Welcome </string>
 
 </resources>
