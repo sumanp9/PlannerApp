@@ -14,8 +14,8 @@ public class Login {
 
     //Little suspecious about column ID. I dont know if it should be a part of the class or not since
     //login id or col id is autoincreamented in sqlite.
-    public Login(String columnID, String username, String fName, String lName, String email, String password){
-        this.col_id = columnID;
+    public Login(String username, String fName, String lName, String email, String password){
+
         this.col_username = username;
         this.col_fName = fName;
         this.col_lName = lName;

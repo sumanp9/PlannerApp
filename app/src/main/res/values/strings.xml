@@ -19,5 +19,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="reset_password">Reset Password</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="reset">Reset</string>
+    <string name="login">Login</string>
+    <string name="or">or</string>
+    <string name="welcome">Welcome </string>
 
 </resources>
