@@ -224,6 +224,7 @@ public class EventsActivity extends AppCompatActivity {
                 dbHandler.addEvent(e);
 
                 Toast.makeText(this, "Event created", Toast.LENGTH_SHORT).show();
+                clearFields();
             }
             else {
                 Toast.makeText(EventsActivity.this, "Please select a valid date", Toast.LENGTH_SHORT).show();
@@ -232,6 +233,18 @@ public class EventsActivity extends AppCompatActivity {
 
     }
         }
+
+    private void clearFields() {
+        txtEventName.setText("");
+        editDescription.setText("");
+        editDate.setText("Event Start Date");
+        editEndDate.setText("Event End Date");
+        editTime.setText("Event Time");
+
+
+
+
+    }
 
     private boolean check2Dates(String endDate, String startDate)  {
 

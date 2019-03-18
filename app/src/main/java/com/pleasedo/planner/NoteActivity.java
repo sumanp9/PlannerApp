@@ -110,6 +110,14 @@ public class NoteActivity extends AppCompatActivity {
             dbHandler.addNote(newNote);
             Toast.makeText(this, "Note created for"+ userName, Toast.LENGTH_SHORT).show();
 
+            clearFields();
+
         }
+    }
+
+    private void clearFields() {
+        noteDateTv.setText("Note Date");
+        noteDescMT.setText("");
+        noteTitleET.setText("");
     }
 }
