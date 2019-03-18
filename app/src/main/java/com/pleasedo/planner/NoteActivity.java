@@ -1,33 +1,62 @@
 package com.pleasedo.planner;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class NoteActivity extends AppCompatActivity {
-    FloatingActionButton CancelButton;
 
+
+    @BindView(R.id.floatingBack2)
+    FloatingActionButton floatingBack2;
+    @BindView(R.id.floatingSaveNote)
+    FloatingActionButton floatingSaveNote;
+    @BindView(R.id.notesTV)
+    TextView notesTV;
+    @BindView(R.id.noteTitleET)
+    EditText noteTitleET;
+    @BindView(R.id.noteDescMT)
+    EditText noteDescMT;
+    @BindView(R.id.noteDateTv)
+    TextView noteDateTv;
+    String userName ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-
-        CancelButton =(FloatingActionButton) findViewById(R.id.cancelFltBtn);
-
-        CancelButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NoteActivity.this, welcome.class);
-                startActivity(intent);
-            }
-        });
+        ButterKnife.bind(this);
+        userName =  getIntent().getStringExtra("username");
+        
 
     }
 
+    @OnClick({R.id.floatingBack2, R.id.floatingSaveNote, R.id.noteDateTv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.floatingBack2:
+                onBackPressed();
+                break;
+            case R.id.floatingSaveNote:
+                onSavePressed();
+                break;
+            case R.id.noteDateTv:
+                onDateClicked();
+                break;
+        }
+    }
+
+    private void onDateClicked() {
+    }
+
+    private void onSavePressed() {
+    }
 }

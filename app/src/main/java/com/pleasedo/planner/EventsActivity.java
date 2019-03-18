@@ -7,13 +7,19 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.pleasedo.databases.userActivityDB;
+import com.pleasedo.dbClass.Event;
+
+import java.io.File;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -21,18 +27,33 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EventsActivity extends AppCompatActivity {
+
     @BindView(R.id.editDate)
     TextView editDate;
+
     @BindView(R.id.txtEventName)
     EditText txtEventName;
+
     @BindView(R.id.floatingBack)
     FloatingActionButton floatingBack;
+
     @BindView(R.id.floatingSaveEvent)
     FloatingActionButton floatingSaveEvent;
+
     @BindView(R.id.editTime)
     TextView editTime;
 
+    @BindView(R.id.editEndDate)
+    TextView editEndDate;
+
+    @BindView(R.id.editDescription)
+    EditText editDescription;
+
+    private String name ="";
+    private userActivityDB dbHandler;
+
     private DatePickerDialog.OnDateSetListener onDateSetListener;
+    private DatePickerDialog.OnDateSetListener onEndDateSetListener;
     private TimePickerDialog.OnTimeSetListener onTimeSetListner;
 
     @SuppressLint("WrongViewCast")
@@ -41,6 +62,10 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
         ButterKnife.bind(this);
+
+        name+=getIntent().getStringExtra("username");
+        dbHandler = new userActivityDB(this,name,null,1);
+
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -49,19 +74,26 @@ public class EventsActivity extends AppCompatActivity {
             }
         };
 
+        onEndDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                String dateset = month + "/" + day + "/" + year;
+                editEndDate.setText(dateset);
+
+            }
+        };
+
         onTimeSetListner = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hour, int minute) {
-                if (hour > 12){
-                    String timeset =  hour-12+ ":"+minute+ " PM";
+                if (hour > 12) {
+                    String timeset = hour - 12 + ":" + minute + " PM";
                     editTime.setText(timeset);
-                }
-                else if (hour <12){
-                    String timeset =  hour+ ":"+minute+ " AM";
+                } else if (hour < 12) {
+                    String timeset = hour + ":" + minute + " AM";
                     editTime.setText(timeset);
-                }
-                else if (hour ==12){
-                    String timeset =  hour-12+ ":"+minute+ " AM";
+                } else if (hour == 12) {
+                    String timeset = hour - 12 + ":" + minute + " AM";
                     editTime.setText(timeset);
 
                 }
@@ -70,7 +102,8 @@ public class EventsActivity extends AppCompatActivity {
         };
     }
 
-    @OnClick({R.id.floatingBack, R.id.floatingSaveEvent,R.id.editDate, R.id.editTime})
+    @OnClick({R.id.floatingBack, R.id.floatingSaveEvent,
+            R.id.editDate, R.id.editTime, R.id.editEndDate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.floatingBack:
@@ -81,50 +114,105 @@ public class EventsActivity extends AppCompatActivity {
                 break;
 
             case R.id.editDate:
-                onDateClicked();
+                onDateClicked("Start");
                 break;
             case R.id.editTime:
                 onTimeClicked();
                 break;
+            case R.id.editEndDate:
+                onDateClicked("End"); //need to work on this
+                break;
+
         }
     }
 
-    public void onDateClicked() {
+    private void onEndDateClicked() {
+    }
+
+    public void onDateClicked(String type) {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = null;
         //int time  = cal.get(Calendar.HOUR)
 
-        DatePickerDialog dialog = new DatePickerDialog(
-                EventsActivity.this,
-                android.R.style.Theme_DeviceDefault_Dialog,
-                onDateSetListener,
-                year, month, day);
+        if (type.equals("Start")){
+
+            dialog = new DatePickerDialog(
+                    EventsActivity.this,
+                    android.R.style.Theme_DeviceDefault_Dialog,
+                    onDateSetListener,
+                    year, month, day);
+        }
+        else if (type.equals("End"))
+        {
+            dialog = new DatePickerDialog(
+                    EventsActivity.this,
+                    android.R.style.Theme_DeviceDefault_Dialog,
+                    onEndDateSetListener,
+                    year, month, day);
+        }
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
         dialog.show();
     }
 
 
-
     private void onTimeClicked() {
         Calendar cal = Calendar.getInstance();
 
-        int hour  = cal.get(Calendar.HOUR);
-        int mins =  cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        int mins = cal.get(Calendar.MINUTE);
         int am_pm = cal.get(Calendar.AM_PM);
 
 
         TimePickerDialog dialog = new TimePickerDialog(EventsActivity.this,
                 android.R.style.Theme_DeviceDefault_Dialog,
-                onTimeSetListner,hour,mins,true);
+                onTimeSetListner, hour, mins, true);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
         dialog.show();
     }
 
     private void onSavePressed() {
+        String startDate =  editDate.getText().toString();
+        String endDate =  editEndDate.getText().toString();
+        String title =  txtEventName.getText().toString();
+        String time = editTime.getText().toString();
+        String details  = editDescription.getText().toString();
+
+
+        if (startDate.equals("Event Start Date") || endDate.equals("Event End Date") ||
+                time.equals("Event Time") || title.isEmpty() || details.isEmpty()){
+            Toast.makeText(this, "Please fill all the required fields to create event", Toast.LENGTH_SHORT).show();
+
+        }
+
+        else{
+            Event e = new Event();
+            e.setEventTitle(title);
+            e.setEventDetails(details);
+            e.setEventEndDate(endDate);
+            e.setEventStartDate(startDate);
+            e.setEventTime(time);
+
+            dbHandler.addEvent(e);
+
+            Toast.makeText(this, "Event created", Toast.LENGTH_SHORT).show();
+
+            /*File dbFile = this.getDatabasePath("/data/data/com.pleasedo.planner/databases/"+userName+".db");
+            if (dbFile.exists()) {
+                Toast.makeText(this, "Database exists for this user" + dbHandler, Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this, "Database Does not exist. Creating new database", Toast.LENGTH_SHORT).show();
+                //createUsersdb();
+            }*/
+        }
+
+
+
     }
 
 

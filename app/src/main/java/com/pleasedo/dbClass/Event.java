@@ -7,15 +7,17 @@ public class Event {
     private String eventDetails;
     private String eventStartDate;
     private String eventEndDate;
+    private String eventTime;
 
 
     public Event(){}
 
-    public Event(String evenTitle, String eventDetails, String eventStartDate, String eventEndDate){
+    public Event(String evenTitle, String eventDetails, String eventStartDate, String eventEndDate, String eventTime){
         this.eventTitle = evenTitle;
         this.eventDetails =eventDetails;
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
+        this.eventTime = eventTime;
     }
 
     public String getEventID() {
@@ -56,5 +58,13 @@ public class Event {
 
     public void setEventEndDate(String eventEndDate) {
         this.eventEndDate = eventEndDate;
+    }
+
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
     }
 }
