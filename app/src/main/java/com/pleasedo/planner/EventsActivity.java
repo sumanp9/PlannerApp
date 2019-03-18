@@ -3,6 +3,7 @@ package com.pleasedo.planner;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,7 +21,11 @@ import com.pleasedo.databases.userActivityDB;
 import com.pleasedo.dbClass.Event;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,14 +91,35 @@ public class EventsActivity extends AppCompatActivity {
         onTimeSetListner = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hour, int minute) {
+                String timeset = "";
                 if (hour > 12) {
-                    String timeset = hour - 12 + ":" + minute + " PM";
+                    if (minute >=10) {
+                        timeset+= hour - 12 + ":" + minute + " PM";
+                    }
+                    else{
+                        timeset+= hour - 12 + ":" +"0" +minute + " PM";
+
+                    }
+
                     editTime.setText(timeset);
                 } else if (hour < 12) {
-                    String timeset = hour + ":" + minute + " AM";
+                    if (minute >=10) {
+                        timeset = hour + ":" + minute + " AM";
+                    }
+                    else{
+                        timeset = hour + ":" + "0"+minute + " AM";
+
+                    }
                     editTime.setText(timeset);
                 } else if (hour == 12) {
-                    String timeset = hour - 12 + ":" + minute + " AM";
+                    if (minute >=10) {
+                        timeset = hour - 12 + ":" + minute + " AM";
+                    }
+                    else
+                    {
+                        timeset = hour - 12 + ":" + "0"+minute + " AM";
+
+                    }
                     editTime.setText(timeset);
 
                 }
@@ -124,9 +150,6 @@ public class EventsActivity extends AppCompatActivity {
                 break;
 
         }
-    }
-
-    private void onEndDateClicked() {
     }
 
     public void onDateClicked(String type) {
@@ -164,8 +187,6 @@ public class EventsActivity extends AppCompatActivity {
 
         int hour = cal.get(Calendar.HOUR);
         int mins = cal.get(Calendar.MINUTE);
-        int am_pm = cal.get(Calendar.AM_PM);
-
 
         TimePickerDialog dialog = new TimePickerDialog(EventsActivity.this,
                 android.R.style.Theme_DeviceDefault_Dialog,
@@ -175,7 +196,8 @@ public class EventsActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void onSavePressed() {
+    private void onSavePressed()  {
+
         String startDate =  editDate.getText().toString();
         String endDate =  editEndDate.getText().toString();
         String title =  txtEventName.getText().toString();
@@ -189,32 +211,70 @@ public class EventsActivity extends AppCompatActivity {
 
         }
 
-        else{
-            Event e = new Event();
-            e.setEventTitle(title);
-            e.setEventDetails(details);
-            e.setEventEndDate(endDate);
-            e.setEventStartDate(startDate);
-            e.setEventTime(time);
+        else {
+            //this checks if the endDate enteredby the user is smaller than the startDate
+            if (check2Dates(endDate, startDate)) {
+                Event e = new Event();
+                e.setEventTitle(title);
+                e.setEventDetails(details);
+                e.setEventEndDate(endDate);
+                e.setEventStartDate(startDate);
+                e.setEventTime(time);
 
-            dbHandler.addEvent(e);
+                dbHandler.addEvent(e);
 
-            Toast.makeText(this, "Event created", Toast.LENGTH_SHORT).show();
-
-            /*File dbFile = this.getDatabasePath("/data/data/com.pleasedo.planner/databases/"+userName+".db");
-            if (dbFile.exists()) {
-                Toast.makeText(this, "Database exists for this user" + dbHandler, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Event created", Toast.LENGTH_SHORT).show();
             }
-            else{
-                Toast.makeText(this, "Database Does not exist. Creating new database", Toast.LENGTH_SHORT).show();
-                //createUsersdb();
-            }*/
+            else {
+                Toast.makeText(EventsActivity.this, "Please select a valid date", Toast.LENGTH_SHORT).show();
+            }
+
+
+    }
         }
 
+    private boolean check2Dates(String endDate, String startDate)  {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+
+        Calendar dateEnd = Calendar.getInstance();
+        Calendar dateStart = Calendar.getInstance();
+
+        try {
+            dateEnd.setTime(sdf.parse(endDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            dateStart.setTime(sdf.parse(startDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        int eYear = dateEnd.get(Calendar.YEAR);
+        int eDay = dateEnd.get(Calendar.DAY_OF_MONTH);
+        int eMonth = dateEnd.get(Calendar.MONTH);
+
+        int sYear = dateStart.get(Calendar.YEAR);
+        int sDay = dateStart.get(Calendar.DAY_OF_MONTH);
+        int sMonth = dateStart.get(Calendar.MONTH);
+
+
+        if ((eYear >= sYear && eMonth >= sMonth && eDay >= sDay)) {
+
+            return true;
+
+        } else {
+            return false;
+
+        }
 
     }
 
 
-
 }
+
+
+
+
+

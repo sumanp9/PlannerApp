@@ -80,19 +80,21 @@
     </com.github.clans.fab.FloatingActionMenu>
 
 
-    <TextView
+    <EditText
         android:id="@+id/txtExample"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="199dp"
+        android:layout_height="187dp"
         android:layout_marginStart="66dp"
         android:layout_marginLeft="66dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="237dp"
         android:layout_marginRight="237dp"
         android:layout_marginBottom="554dp"
+        android:inputType="textMultiLine"
         android:lineSpacingExtra="8sp"
         android:text="Example"
-        android:textSize="36sp"
+
+        android:textSize="14sp"
         android:typeface="sans"
         app:fontFamily="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,5 +134,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+
 
 </android.support.constraint.ConstraintLayout>

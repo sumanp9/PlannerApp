@@ -66,10 +66,6 @@ public class welcome extends AppCompatActivity {
                 Intent intent = new Intent(welcome.this, EventsActivity.class);
                 intent.putExtra("username", userName);
                 startActivity(intent);
-
-                /*Intent intent =  new Intent(welcome.this,Calender_Activity.class);
-                intent.putExtra("note",event);
-                startActivity(intent);*/
             }
         });
 
