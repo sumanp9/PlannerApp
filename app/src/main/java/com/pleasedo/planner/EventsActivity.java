@@ -74,7 +74,7 @@ public class EventsActivity extends AppCompatActivity {
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                String dateset = month + "/" + day + "/" + year;
+                String dateset = month+1 + "/" + day + "/" + year;
                 editDate.setText(dateset);
             }
         };
@@ -82,7 +82,7 @@ public class EventsActivity extends AppCompatActivity {
         onEndDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                String dateset = month + "/" + day + "/" + year;
+                String dateset = month+1 + "/" + day + "/" + year;
                 editEndDate.setText(dateset);
 
             }
@@ -275,9 +275,16 @@ public class EventsActivity extends AppCompatActivity {
 
         if ((eYear >= sYear && eMonth >= sMonth && eDay >= sDay)) {
 
+            //what if month is larger but date is smaller
+
             return true;
 
-        } else {
+        }
+        else if (eYear >= sYear && eMonth >= sMonth ){
+            return true;
+
+        }
+        else{
             return false;
 
         }
