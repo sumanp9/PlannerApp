@@ -12,6 +12,8 @@ import com.pleasedo.dbClass.Event;
 import com.pleasedo.dbClass.Note;
 import com.pleasedo.planner.welcome;
 
+import java.util.ArrayList;
+
 public class userActivityDB extends SQLiteOpenHelper {
     private static final  int DATABASE_VERSION =2;
     private static String DATABASE_NAME = "";
@@ -93,9 +95,10 @@ public class userActivityDB extends SQLiteOpenHelper {
         db.close();
     }
 
-    public String getName(){
+    public ArrayList<Event> getName(){
         //return "";
 
+        ArrayList<Event> arrayEvent = new ArrayList<>();
 
         String dbString= "";
         SQLiteDatabase db =  getWritableDatabase();
@@ -110,11 +113,20 @@ public class userActivityDB extends SQLiteOpenHelper {
         c.moveToFirst();
 
         while(!c.isAfterLast()){
+            /*
 
             if (c.getString(c.getColumnIndex("Event_Title"))!=null){
 
                 dbString += c.getString(c.getColumnIndex("Event_Title"));
-            }
+            }*/
+            Event e = new Event();
+            e.setEventTitle(c.getString(c.getColumnIndex("Event_Title")));
+            e.setEventDetails(c.getString(c.getColumnIndex("Event_Details")));
+            e.setEventTime(c.getString(c.getColumnIndex("Event_Time")));
+            e.setEventEndDate(c.getString(c.getColumnIndex("Event_End_Date")));
+            e.setEventStartDate(c.getString(c.getColumnIndex("Event_Start_Date")));
+            arrayEvent.add(e);
+
             c.moveToNext();
         }
 
@@ -122,7 +134,7 @@ public class userActivityDB extends SQLiteOpenHelper {
         db.close();
 
 
-        return dbString;
+        return arrayEvent;
     }
 
     public void examp(){
