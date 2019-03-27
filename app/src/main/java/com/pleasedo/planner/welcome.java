@@ -115,7 +115,7 @@ public class welcome extends AppCompatActivity {
             eTime.add(events.get(position).getEventTime());
         }
 
-        initRecyclerView(eTitle, eDescription, eStartDate, eEndDate, eTitle);
+        initRecyclerView(eTitle, eDescription, eStartDate, eEndDate, eTime);
     }
 
     private void initRecyclerView(ArrayList<String> eTitle, ArrayList<String> eDescription, ArrayList<String> eStartDate, ArrayList<String> eEndDate, ArrayList<String> eTime) {

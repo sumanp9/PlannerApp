@@ -54,8 +54,8 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
-        android:layout_marginLeft="9dp"
         android:layout_marginTop="380dp"
+        android:layout_marginRight="5dp"
         android:layout_toRightOf="@+id/Password"
         android:text="Forgot?"
         android:textAllCaps="false"
@@ -76,9 +76,9 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
         android:layout_marginLeft="125dp"
         android:layout_marginTop="41dp"
-        android:layout_below="@+id/btnLogin"
         android:text="Dont have an account yet?"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -89,14 +89,10 @@
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="41dp"
-        android:layout_below="@+id/textView5"
-        android:text="Register"
-        />
-
-
-
+        android:text="Register" />
 
 
 </RelativeLayout>
