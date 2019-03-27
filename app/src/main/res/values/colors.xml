@@ -6,4 +6,5 @@
     <color name="tickBlue">#3F3FDD</color>
     <color name="white">#ffffff</color>
     <color name="grey">#F57D0C</color>
+    <color name="cardColor">#212F3C</color>
 </resources>
