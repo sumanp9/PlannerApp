@@ -1,12 +1,13 @@
 package com.pleasedo.planner;
 
 import android.content.Intent;
-import android.preference.Preference;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pleasedo.StoredData.Prefeneces;
@@ -14,10 +15,26 @@ import com.pleasedo.databases.loginDB;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private  EditText user, pass,box;
-    private  Button btnLogin,btnRegister,btnForgot;
+    @BindView(R.id.btnForgot)
+    Button btnForgot;
+    @BindView(R.id.UsernamePT)
+    EditText user;
+    @BindView(R.id.Password)
+    EditText pass;
+    @BindView(R.id.btnLogin)
+    Button btnLogin;
+    @BindView(R.id.btnRegister)
+    Button btnRegister;
+    @BindView(R.id.textView5)
+    TextView textView5;
+    @BindView(R.id.imageView)
+    ImageView imageView;
+
 
     loginDB dbHandler;
 
@@ -26,17 +43,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        dbHandler = new loginDB(this,null,null,1);
+        ButterKnife.bind(this);
+        dbHandler = new loginDB(this, null, null, 1);
 
-        user = (EditText)findViewById(R.id.UsernamePT);
-        pass = (EditText)findViewById(R.id.Password);
-        btnLogin = (Button)findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
-        btnForgot =findViewById(R.id.btnForgot);
 
-        box = findViewById(R.id.box);
 
-        if (!Prefeneces.ifExists(this)){
+        if (!Prefeneces.ifExists(this)) {
             signIn();
         }
 
@@ -48,10 +60,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean getUsers(String userName, String password) {
-        ArrayList<String>userArray = new ArrayList<String>();
-        userArray =  dbHandler.userList();
-        if (userArray.contains(userName)){
-            if(dbHandler.getPassword(userName,password)){
+        ArrayList<String> userArray = new ArrayList<String>();
+        userArray = dbHandler.userList();
+        if (userArray.contains(userName)) {
+            if (dbHandler.getPassword(userName, password)) {
                 return true;
             }
 
@@ -63,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         if (!Prefeneces.getUsername(this).equals("")) {
             String username = Prefeneces.getUsername(this);
             String pass = Prefeneces.getPassword(this);
-            if (getUsers(username,pass)){
+            if (getUsers(username, pass)) {
                 Intent intent = new Intent(this, welcome.class);
                 intent.putExtra("Username", username);
                 startActivity(intent);
@@ -74,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void forgotPressed() {
-        btnForgot.setOnClickListener(new View.OnClickListener(){
+        btnForgot.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -101,13 +113,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (user.getText().toString().isEmpty()){
+                if (user.getText().toString().isEmpty()) {
                     user.setError("Username cannot be empty");
-                }
-                else if (pass.getText().toString().isEmpty()){
+                } else if (pass.getText().toString().isEmpty()) {
                     pass.setError("Password field cannot be empty");
-                }
-                else {
+                } else {
                     checkUserNameandPassword();
                 }
             }
@@ -116,28 +126,24 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkUserNameandPassword() {
 
-        ArrayList<String>userArray = new ArrayList<String>();
-        String userName =  user.getText().toString();
+        ArrayList<String> userArray = new ArrayList<String>();
+        String userName = user.getText().toString();
         String password = pass.getText().toString();
-        userArray =  dbHandler.userList();
-        box.setText(dbHandler.print());
-        if (userArray.contains(userName)){
-            if(dbHandler.getPassword(userName,password)){
-                Prefeneces.saveUserData(userName,password,this);
+        userArray = dbHandler.userList();
+        if (userArray.contains(userName)) {
+            if (dbHandler.getPassword(userName, password)) {
+                Prefeneces.saveUserData(userName, password, this);
                 Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, welcome.class);
                 intent.putExtra("Username", userName);
                 startActivity(intent);
                 finish();
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Username or password incorrect", Toast.LENGTH_LONG).show();
             }
 
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "username does not exists", Toast.LENGTH_LONG).show();
         }
     }

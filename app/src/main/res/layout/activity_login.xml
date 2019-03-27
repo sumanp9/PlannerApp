@@ -1,148 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginback"
     tools:context=".LoginActivity">
-
-    <Button
-        android:id="@+id/btnForgot"
-        style="?android:attr/borderlessButtonStyle"
-
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginBottom="268dp"
-        android:text="Forgot?"
-        android:textAllCaps="false"
-        android:textColor="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernamePT"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/UsernamePT"
-        android:layout_width="162dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/error_field_required"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHighlight="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/Password"
-        android:layout_width="162dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/error_field_required"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.611" />
-
-    <Button
-        android:id="@+id/btnLogin"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Sign in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.731" />
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="41dp"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <EditText
-        android:id="@+id/box"
-        android:layout_width="238dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/UsernamePT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="11dp"
-        android:text="Dont have an account yet?"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -153,11 +16,83 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="142dp"
         android:layout_marginRight="142dp"
-        android:layout_marginBottom="51dp"
-        app:layout_constraintBottom_toTopOf="@+id/box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        tools:ignore="VectorDrawableCompat" />
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/UsernamePT"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="185dp"
+        android:contentDescription="@string/error_field_required"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white" />
+
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/UsernamePT"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/error_field_required"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnForgot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/Password"
+        android:text="Forgot?"
+        android:textAllCaps="false"
+        android:textColor="@color/grey" />
+
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Password"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="15dp"
+        android:text="Sign in" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="41dp"
+        android:text="Dont have an account yet?"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic" />
+
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="41dp"
+        android:text="Register" />
+
+
+</RelativeLayout>
