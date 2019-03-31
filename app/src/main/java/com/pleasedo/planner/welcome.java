@@ -97,7 +97,6 @@ public class welcome extends AppCompatActivity {
             Toast.makeText(this, "Database exists for this user" + dbHandler, Toast.LENGTH_LONG).show();
             makeEventArrays();
 
-            // txtExample.setText(events.get(0).getEventTime());
         } else {
             Toast.makeText(this, "Database Does not exist. Creating new database", Toast.LENGTH_SHORT).show();
         }
