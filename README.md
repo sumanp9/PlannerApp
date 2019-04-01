@@ -1,5 +1,5 @@
 # PlannerApp
-A planner app
+A planner app that allows users to save events locally into their phone's database.
 
 
 ## Login Screen
